@@ -1,0 +1,17 @@
+2024-12-22 19:58:16 [AWT-EventQueue-0] INFO  lab08.GUI - Starting GUI construction.
+2024-12-22 19:58:16 [AWT-EventQueue-0] INFO  lab08.GUI - GUI successfully constructed.
+2024-12-22 19:58:18 [AWT-EventQueue-0] INFO  lab08.GUI - File menu 'Open' item selected.
+2024-12-22 19:58:18 [AWT-EventQueue-0] INFO  lab08.GUI - Starting file loading process.
+2024-12-22 19:58:34 [AWT-EventQueue-0] INFO  lab08.GUI - File successfully loaded: C:\Eclipse\workspace\lab06\test_read.xml
+2024-12-22 19:58:53 [AWT-EventQueue-0] INFO  lab08.GUI - File menu 'Save' item selected.
+2024-12-22 19:58:53 [AWT-EventQueue-0] INFO  lab08.GUI - Starting data saving to file.
+2024-12-22 19:59:07 [AWT-EventQueue-0] INFO  lab08.GUI - Data successfully saved to file: C:\Eclipse\workspace\08\test_write.xml
+2024-12-22 20:25:30 [AWT-EventQueue-0] INFO  lab08.GUI - Starting GUI construction.
+2024-12-22 20:25:30 [AWT-EventQueue-0] DEBUG lab08.GUI - Adding event handlers.
+2024-12-22 20:25:30 [AWT-EventQueue-0] INFO  lab08.GUI - GUI successfully constructed.
+2024-12-22 20:25:32 [AWT-EventQueue-0] INFO  lab08.GUI - File menu 'Open' item selected.
+2024-12-22 20:25:32 [AWT-EventQueue-0] INFO  lab08.GUI - Starting file loading process.
+2024-12-22 20:25:56 [AWT-EventQueue-0] INFO  lab08.GUI - File successfully loaded: C:\Eclipse\workspace\lab06\test_read.xml
+2024-12-22 20:25:59 [AWT-EventQueue-0] INFO  lab08.GUI - File menu 'Save' item selected.
+2024-12-22 20:25:59 [AWT-EventQueue-0] INFO  lab08.GUI - Starting data saving to file.
+2024-12-22 20:26:10 [AWT-EventQueue-0] INFO  lab08.GUI - Data successfully saved to file: C:\Eclipse\workspace\08\test_write.xml
