@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<HotelData>
+    <Rooms>
+        <Room Number="101" OccupiedBy="John Doe" Type="Single"/>
+        <Room Number="102" OccupiedBy="Jane Smith" Type="Double"/>
+        <Room Number="103" OccupiedBy="" Type="Suite"/>
+        <Room Number="104" OccupiedBy="Alice Johnson" Type="Single"/>
+        <Room Number="105" OccupiedBy="Bob Brown" Type="Double"/>
+    </Rooms>
+    <Guests>
+        <Guest Name="John Doe" RoomNumber="101" StayDuration="3"/>
+        <Guest Name="Jane Smith" RoomNumber="102" StayDuration="5"/>
+        <Guest Name="Alice Johnson" RoomNumber="104" StayDuration="2"/>
+    </Guests>
+    <Employees>
+        <Employee Name="Michael Black" Position="Manager" RoomType="Suite"/>
+        <Employee Name="Sara White" Position="Housekeeper" RoomType="Single"/>
+    </Employees>
+    <Prices>
+        <Price Price="50" ServiceType="Single"/>
+        <Price Price="80" ServiceType="Double"/>
+        <Price Price="120" ServiceType="Suite"/>
+    </Prices>
+</HotelData>
