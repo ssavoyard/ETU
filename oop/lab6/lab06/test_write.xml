@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Guests>
+    <Guest CheckIn="04.11.2024" CheckOut="11.11.2024" Name="John Doe" Room="106"/>
+    <Guest CheckIn="11.11.2024" CheckOut="18.11.2024" Name="Jane Doe" Room="208"/>
+    <Guest CheckIn="18.11.2024" CheckOut="25.11.2024" Name="John Smith" Room="309"/>
+</Guests>
