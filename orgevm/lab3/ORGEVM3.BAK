@@ -1,0 +1,117 @@
+#include <GRAPHICS.H>
+#include <MATH.H>
+#include <CONIO.H>
+#include <STDIO.H>
+
+#define PI M_PI
+
+// Function to draw labels on the X and Y axes
+void drawAxesLabels(float x_left_border, float x_right_border, float y_bottom_border, float y_top_border, float x_step, float y_step) {
+    char label[50];
+    float x, y;
+    float screen_x, screen_y;
+    float offsetX, scaleX;
+    float offsetY, scaleY;
+    int count = 1;
+    setcolor(WHITE);
+
+    // Draw labels on the X-axis starting from PI up to 10 * PI
+    for (x = x_left_border + PI; x <= x_right_border; x += x_step) {
+	offsetX = x - x_left_border;
+	scaleX = 500 / (x_right_border - x_left_border);
+	screen_x = 50 + offsetX * scaleX;
+	line(screen_x, 105, screen_x, 95); // Draw a small tick mark for the label
+
+	// Display X-axis labels in terms of PI
+	sprintf(label, "%dPI", count);
+	outtextxy(screen_x - 10, 110, label);
+	count++;
+    }
+
+    // Draw labels on the Y-axis starting from the bottom up to the top
+    for (y = y_bottom_border; y <= y_top_border; y += y_step) {
+	offsetY = y - y_bottom_border;
+	scaleY = 280 / (y_top_border - y_bottom_border);
+	screen_y = 380 - offsetY * scaleY;
+	line(42, screen_y, 57, screen_y); // Draw a small tick mark for the label
+
+	sprintf(label, "%.1f", y);
+	outtextxy(20, screen_y - 10, label); // Display Y-axis label
+    }
+}
+
+int main(void) {
+    int gdriver = DETECT, gmode;
+    float x_left_border = 0, x_right_border = 10 * PI;
+    float y_bottom_border = -7, y_top_border = 0;
+    float step = 0.00005; // Step size for smooth graph drawing
+    float x, y;
+    float screen_x, screen_y;
+    float y_max_value = -32000; // Initialize maximum value for the function
+    int x_max_coordinate, y_max_coordinate;
+    char max_value[50];
+    float scaleX, scaleY, offsetX, offsetY;
+
+    // Initialize graphics mode
+    initgraph(&gdriver, &gmode, "C://TURBO3//BIN");
+
+    setlinestyle(0, 1, 2);
+    setcolor(WHITE);
+
+    // Draw X-axis at the top of the screen
+    line(50, 100, 600, 100);
+    line(595, 95, 600, 100);
+    line(595, 105, 600, 100);
+    outtextxy(610, 100, "x");
+
+    // Draw Y-axis
+    line(50, 400, 50, 50);
+    line(45, 55, 50, 50);
+    line(55, 55, 50, 50);
+    outtextxy(30, 50, "y");
+
+    // Draw the labels on the X and Y axes
+    drawAxesLabels(x_left_border, x_right_border, y_bottom_border, y_top_border, PI, 1);
+
+    // Scaling factors for converting to screen coordinates
+    scaleX = 500 / (x_right_border - x_left_border);
+    scaleY = 300 / (y_top_border - y_bottom_border);
+
+    // Plot the function graph
+    for (x = x_left_border + PI; x < x_right_border; x += step) {
+	y = pow(cos(x / 2), 2) - sqrt(x);
+	offsetX = x - x_left_border;
+	offsetY = y - y_bottom_border;
+
+	screen_x = 50 + offsetX * scaleX;
+	screen_y = 400 - offsetY * scaleY;
+
+	// Draw pixel if it fits within the screen boundaries
+	if (screen_y >= 50 && screen_y <= 400) {
+	    putpixel(screen_x, screen_y, WHITE);
+	}
+
+	// Check if current y is the maximum value encountered
+	if (y > y_max_value) {
+	    x_max_coordinate = screen_x;
+	    y_max_coordinate = screen_y;
+	    y_max_value = y;
+	}
+    }
+
+    // Display max value and mark it on the graph
+    settextstyle(0, 0, 2);
+    sprintf(max_value, "Max Value: %.2f", y_max_value);
+    setcolor(GREEN);
+    circle(x_max_coordinate, y_max_coordinate, 8);
+    outtextxy(x_max_coordinate + 10, y_max_coordinate - 20, max_value);
+
+    // Display the function formula
+    setcolor(WHITE);
+    settextstyle(0, 0, 1);
+    outtextxy(50, 420, "f(x) = (cos(x/2))^2 - sqrt(x)");
+
+    getch(); // Wait for user input to exit
+    closegraph(); // Close graphics mode
+    return 0;
+}

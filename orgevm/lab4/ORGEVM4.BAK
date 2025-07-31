@@ -1,0 +1,114 @@
+#include <dos.h>
+#include <stdio.h>
+#include <conio.h>
+
+#define X1 15
+#define Y1 15
+#define X2 65
+#define Y2 20
+#define DELAY 150
+
+typedef struct {
+    int x;
+    int y;
+    int dx;
+} Point;
+
+int my_getch() {
+    union REGS in, out;
+    in.h.ah = 0x07; // DOS function for reading a character without echo
+    int86(0x21, &in, &out);
+    return out.h.al;
+}
+
+int my_kbhit() {
+    union REGS in, out;
+    in.h.ah = 0x0B; // DOS function for checking keyboard input
+    int86(0x21, &in, &out);
+    return out.h.al != 0; // Returns non-zero if a key is pressed
+}
+
+void draw_window() {
+    int i;
+    for (i = X1; i <= X2; i++) {
+        gotoxy(i, Y1);
+        printf("-");
+        gotoxy(i, Y2);
+        printf("-");
+    }
+    for (i = Y1; i <= Y2; i++) {
+        gotoxy(X1, i);
+        printf("|");
+        gotoxy(X2, i);
+        printf("|");
+    }
+}
+
+void render(Point p) {
+    gotoxy(p.x, p.y);
+    printf("*");
+}
+
+void clear(Point p) {
+    gotoxy(p.x, p.y);
+    printf(" ");
+}
+
+void update_direction(Point *p) {
+    int ch = my_getch();
+
+    if (ch == 27) { // ESC key
+        p->dx = 0;
+        return;
+    }
+
+    if (ch == 0) {
+        ch = my_getch(); // Read second part of key code
+        if (ch == 75) { // Left arrow
+            p->dx = -1;
+        } else if (ch == 77) { // Right arrow
+            p->dx = 1;
+        }
+    }
+}
+
+void update_position(Point *p) {
+    clear(*p);
+
+    if (p->dx == -1 && p->x > X1 + 1) { // Move left
+        p->x--;
+    } else if (p->dx == 1 && p->x < X2 - 1) { // Move right
+        p->x++;
+    }
+
+    render(*p);
+}
+
+int main() {
+    Point point = {
+        (X1 + X2) / 2, // Start position centered
+        (Y1 + Y2) / 2, // Fixed vertical position
+        0              // Initially stationary
+    };
+
+    clrscr();
+    draw_window();
+    render(point);
+
+    while (1) {
+        if (my_kbhit()) {
+            update_direction(&point);
+            if (point.dx == 0) { // Exit on ESC
+                break;
+            }
+        }
+
+        if (point.dx != 0) {
+            update_position(&point);
+            delay(DELAY);
+        }
+    }
+
+    clrscr();
+    return 0;
+}
